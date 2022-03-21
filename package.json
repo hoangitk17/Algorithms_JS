@@ -1,0 +1,17 @@
+{
+  "name": "algorithms",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "jest || true",
+    "build": "babel src -d build",
+    "coverage": "npm run test -- --coverage --silent"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.8",
+    "@babel/preset-env": "^7.16.11",
+    "babel-jest": "^27.5.1",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^27.5.1"
+  }
+}
