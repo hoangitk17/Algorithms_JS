@@ -41,6 +41,55 @@ export default class LinkedList {
   }
 
   /**
+   * @return {LinkedListNode}
+   */
+  deleteHead() {
+    if (this.head === null) {
+      return null;
+    }
+
+    const deletedHead = this.head;
+    if (this.head.next) {
+      this.head = this.head.next;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
+    return deletedHead;
+  }
+
+  /**
+   * @return {LinkedListNode}
+   */
+  deleteTail() {
+    const deletedTail = this.tail;
+
+    if (this.head === this.tail) {
+      // Nếu chỉ có một nút trong danh sách liên kết.
+      this.head = null;
+      this.tail = null;
+
+      return deletedTail;
+    }
+
+    // Nếu có nhiều nút trong danh sách liên kết.
+
+    // Duyệt danh sách đến nút cuối cùng và xoá liên kết "next" của nút trước tail.
+    let currentNode = this.head;
+    while (currentNode.next) {
+      if (!currentNode.next.next) {
+        currentNode.next = null;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+
+    this.tail = currentNode;
+
+    return deletedTail;
+  }
+
+  /**
    * Create a linked list from a given array
    * Tạo một danh sách liên kết đơn dựa trên mảng có sẵn
    * @param {*[]} values
