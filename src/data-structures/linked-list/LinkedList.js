@@ -99,4 +99,19 @@ export default class LinkedList {
     values.forEach((value) => this.append(value));
     return this;
   }
+
+  /**
+   * @return {LinkedListNode[]}
+   */
+  toArray() {
+    const nodes = [];
+
+    let currentNode = this.head;
+    while (currentNode) {
+      nodes.push(currentNode);
+      currentNode = currentNode.next;
+    }
+
+    return nodes;
+  }
 }
