@@ -90,6 +90,45 @@ export default class LinkedList {
   }
 
   /**
+   * @param {*} value
+   * @return {LinkedListNode}
+   */
+  delete(value) {
+    if (this.head === null) {
+      return null;
+    }
+
+    let deletedNode = null;
+
+    // Nếu nút bị xoá là head thì biến nút kế tiếp head trở thành một head mới.
+    while (this.head && this.compare.equal(this.head.value, value)) {
+      deletedNode = this.head;
+      this.head = this.head.next;
+    }
+
+    let currentNode = this.head;
+
+    if (currentNode !== null) {
+      // Nếu nút tiếp theo là nút bị xoá thì làm hãy nút tiếp theo trở thành nút tiếp theo nữa (next next node).
+      while (currentNode.next) {
+        if (this.compare.equal(currentNode.next.value, value)) {
+          deletedNode = currentNode.next;
+          currentNode.next = currentNode.next.next;
+        } else {
+          currentNode = currentNode.next;
+        }
+      }
+    }
+
+    // Kiểm tra nếu tail là nút bị xoá.
+    if (this.compare.equal(this.tail.value, value)) {
+      this.tail = currentNode;
+    }
+
+    return deletedNode;
+  }
+
+  /**
    * Create a linked list from a given array
    * Tạo một danh sách liên kết đơn dựa trên mảng có sẵn
    * @param {*[]} values
