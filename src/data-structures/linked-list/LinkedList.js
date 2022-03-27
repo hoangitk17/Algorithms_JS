@@ -153,4 +153,42 @@ export default class LinkedList {
 
     return nodes;
   }
+
+  /**
+   * @param {function} [callback]
+   * @return {string}
+   */
+  toString(callback) {
+    return this.toArray()
+      .map((node) => node.toString(callback))
+      .toString();
+  }
+
+  /**
+   * Đảo ngược danh sách liên kết.
+   * @returns {LinkedList}
+   */
+  reverse() {
+    let currNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+
+    while (currNode) {
+      // Nơi lưu trữ nút kế tiếp.
+      nextNode = currNode.next;
+
+      // Thay đổi tham chiếu kế tiếp của nút hiện tại để nó liên kết với nút trước đó.
+      currNode.next = prevNode;
+
+      // Dịch chuyển nút prevNode và currNode về trước một bước.
+      prevNode = currNode;
+      currNode = nextNode;
+    }
+
+    // Cập nhật lại head và tail.
+    this.tail = this.head;
+    this.head = prevNode;
+
+    return this;
+  }
 }
