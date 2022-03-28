@@ -1,5 +1,5 @@
 import LinkedListNode from "./LinkedListNode";
-
+import Comparator from "../../utils/Comparator";
 export default class LinkedList {
   constructor() {
     /** @var LinkedListNode */
@@ -190,5 +190,35 @@ export default class LinkedList {
     this.head = prevNode;
 
     return this;
+  }
+
+  /**
+   * @param {Object} findParams
+   * @param {*} findParams.value
+   * @param {function} [findParams.callback]
+   * @return {LinkedListNode}
+   */
+  find({ value = undefined, callback = undefined }) {
+    if (!this.head) {
+      return null;
+    }
+
+    let currentNode = this.head;
+
+    while (currentNode) {
+      // Nếu callback được thiết lập thì phải tìm nút bằng callback.
+      if (callback && callback(currentNode.value)) {
+        return currentNode;
+      }
+
+      // Nếu giá trị được thiết lập thì phải so sánh bằng giá trị
+      if (value !== undefined && this.compare.equal(currentNode.value, value)) {
+        return currentNode;
+      }
+
+      currentNode = currentNode.next;
+    }
+
+    return null;
   }
 }
