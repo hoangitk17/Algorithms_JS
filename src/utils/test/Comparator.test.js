@@ -60,4 +60,19 @@ describe("Comparator", () => {
     const comparator = new Comparator();
     expect(comparator.lessThanOrEqual(2, 1)).toBe(false);
   });
+
+  it("should a greater than b", () => {
+    const comparator = new Comparator();
+    expect(comparator.greaterThanOrEqual(3, 2)).toBe(true);
+  })
+
+  it("should a greater than b", () => {
+    const comparator = new Comparator();
+    expect(comparator.greaterThanOrEqual(3, 3)).toBe(true);
+  })
+  
+  it("should a not greater than b", () => {
+    const comparator = new Comparator();
+    expect(comparator.greaterThanOrEqual(1, 2)).toBe(false);
+  })
 });
