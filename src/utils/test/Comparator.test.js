@@ -16,6 +16,31 @@ describe("Comparator", () => {
     expect(comparator.equal(1, 1)).toBe(true);
   });
 
+  it("should not equal with two string", () => {
+    const comparator = new Comparator();
+    expect(comparator.equal("1", "2")).toBe(false);
+  });
+
+  it("should not equal with two string", () => {
+    const comparator = new Comparator();
+    expect(comparator.equal("2", "1")).toBe(false);
+  });
+
+  it("should equal with two strings", () => {
+    const comparator = new Comparator();
+    expect(comparator.equal("1", "1")).toBe(true);
+  })
+
+  it("should equal with string and number", () => {
+    const comparator = new Comparator();
+    expect(comparator.equal("1", 1)).toBe(false);
+  })
+
+  it("should qual with 2 number float", () => {
+    const comparator = new Comparator();
+    expect(comparator.equal(1, 1.000)).toBe(true);
+  })
+
   it("should a less than b", () => {
     const comparator = new Comparator();
     expect(comparator.lessThan(1, 2)).toBe(true);
@@ -64,15 +89,15 @@ describe("Comparator", () => {
   it("should a greater than b", () => {
     const comparator = new Comparator();
     expect(comparator.greaterThanOrEqual(3, 2)).toBe(true);
-  })
+  });
 
   it("should a greater than b", () => {
     const comparator = new Comparator();
     expect(comparator.greaterThanOrEqual(3, 3)).toBe(true);
-  })
-  
+  });
+
   it("should a not greater than b", () => {
     const comparator = new Comparator();
     expect(comparator.greaterThanOrEqual(1, 2)).toBe(false);
-  })
+  });
 });
