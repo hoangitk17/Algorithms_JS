@@ -26,4 +26,18 @@ describe("LinkedList Test", () => {
     expect(list.tail.value).toBeNull();
     expect(list.tail.next).toBeNull();
   })
+
+  it("Prepend value to linked list", () => {
+    let list = new LinkedList();
+    list.prepend(5);
+    expect(list.head.value).toBe(5);
+    expect(list.tail.value).toBe(5);
+    expect(list.head.next).toBeNull();
+    expect(list.tail.next).toBeNull();
+    list.prepend(6);
+    expect(list.head.value).toBe(6);
+    expect(list.head.next).toBe(list.tail);
+    expect(list.tail.value).toBe(5);
+    expect(list.tail.next).toBeNull();
+  })
 })
