@@ -69,4 +69,17 @@ describe("LinkedList Test", () => {
     list.reverse();
     expect(list.toString()).toBe("5,4,3,2,1");
   })
+
+  it("Delete by value", () => {
+    let list = new LinkedList().fromArray([1, 2, 3, 4, 5, 2, 1, 3]);
+    expect(list.toString()).toBe("1,2,3,4,5,2,1,3");
+    list.delete(2);
+    expect(list.toString()).toBe("1,3,4,5,1,3");
+    expect(list.delete(1)).not.toBeNull();
+    expect(list.toString()).toBe("3,4,5,3");
+    let deletedNode = list.delete(5);
+    expect(deletedNode.length).toBe(1);
+    let deletedNode2 = list.delete(3);
+    expect(deletedNode2.length).toBe(2);
+  })
 })
