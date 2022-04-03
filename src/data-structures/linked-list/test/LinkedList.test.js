@@ -40,4 +40,25 @@ describe("LinkedList Test", () => {
     expect(list.tail.value).toBe(5);
     expect(list.tail.next).toBeNull();
   })
+
+  it("Init list from array", () => {
+    let list = new LinkedList();
+    list.fromArray([1, 2, 3, 4, 5]);
+    expect(list.toString()).toBe("1,2,3,4,5");
+    let list1 = new LinkedList();
+    list1.fromArray([]);
+    expect(list1.toString()).toBe("");
+    let list2 = new LinkedList();
+    list2.fromArray(null);
+    expect(list2.toString()).toBe("");
+    let list3 = new LinkedList();
+    list3.fromArray(undefined);
+    expect(list3.toString()).toBe("");
+    let list4 = new LinkedList();
+    expect(() => list4.fromArray(1)).toThrow("You should pass an array");
+    let list5 = new LinkedList();
+    expect(() => list5.fromArray(true)).toThrow();
+    let list6 = new LinkedList();
+    expect(() => list6.fromArray("hehe")).toThrow();
+  })
 })
