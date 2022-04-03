@@ -61,4 +61,12 @@ describe("LinkedList Test", () => {
     let list6 = new LinkedList();
     expect(() => list6.fromArray("hehe")).toThrow();
   })
+
+  it("Reverse linked list", () => {
+    let list = new LinkedList();
+    list.fromArray([1, 2, 3, 4, 5]);
+    expect(list.toString()).toBe("1,2,3,4,5");
+    list.reverse();
+    expect(list.toString()).toBe("5,4,3,2,1");
+  })
 })
