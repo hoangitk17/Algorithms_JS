@@ -1,11 +1,12 @@
 import LinkedListNode from "./LinkedListNode";
 import Comparator from "../../utils/Comparator";
 export default class LinkedList {
-  constructor() {
+  constructor(comparatorFunction) {
     /** @var LinkedListNode */
     this.head = null;
     /** @var LinkedListNode */
     this.tail = null;
+    this.compare = new Comparator(comparatorFunction);
   }
 
   /**
@@ -98,11 +99,11 @@ export default class LinkedList {
       return null;
     }
 
-    let deletedNode = null;
+    let deletedNode = [];
 
     // Nếu nút bị xoá là head thì biến nút kế tiếp head trở thành một head mới.
     while (this.head && this.compare.equal(this.head.value, value)) {
-      deletedNode = this.head;
+      deletedNode.push(this.head);
       this.head = this.head.next;
     }
 
@@ -112,7 +113,7 @@ export default class LinkedList {
       // Nếu nút tiếp theo là nút bị xoá thì làm hãy nút tiếp theo trở thành nút tiếp theo nữa (next next node).
       while (currentNode.next) {
         if (this.compare.equal(currentNode.next.value, value)) {
-          deletedNode = currentNode.next;
+          deletedNode.push(currentNode.next);
           currentNode.next = currentNode.next.next;
         } else {
           currentNode = currentNode.next;
@@ -135,6 +136,8 @@ export default class LinkedList {
    * @return {LinkedList}
    */
   fromArray(values) {
+    if (!values) return;
+    if (!(Array.isArray(values))) throw new Error("You should pass an array");
     values.forEach((value) => this.append(value));
     return this;
   }
