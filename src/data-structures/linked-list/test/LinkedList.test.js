@@ -82,4 +82,19 @@ describe("LinkedList Test", () => {
     let deletedNode2 = list.delete(3);
     expect(deletedNode2.length).toBe(2);
   })
+
+  it("Find element in a list", () => {
+    let list = new LinkedList();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    list.append(4);
+    list.append(5);
+    list.append(6);
+    expect(list.find(5)).not.toBeNull();
+    expect(list.find(7)).toBeNull();
+    expect(list.find((value) => value > 2)).not.toBeNull();
+    let foundNode = list.find(value => value % 2 === 0);
+    expect(foundNode.value).toBe(2);
+  })
 })
