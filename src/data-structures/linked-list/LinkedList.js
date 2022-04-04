@@ -137,7 +137,7 @@ export default class LinkedList {
    */
   fromArray(values) {
     if (!values) return;
-    if (!(Array.isArray(values))) throw new Error("You should pass an array");
+    if (!Array.isArray(values)) throw new Error("You should pass an array");
     values.forEach((value) => this.append(value));
     return this;
   }
@@ -201,21 +201,18 @@ export default class LinkedList {
    * @param {function} [findParams.callback]
    * @return {LinkedListNode}
    */
-  find({ value = undefined, callback = undefined }) {
-    if (!this.head) {
-      return null;
-    }
+  find(param) {
+    if (!this.head) return null;
 
     let currentNode = this.head;
-
     while (currentNode) {
       // Nếu callback được thiết lập thì phải tìm nút bằng callback.
-      if (callback && callback(currentNode.value)) {
+      if (typeof(param) === "function" && param(currentNode.value)) {
         return currentNode;
       }
 
       // Nếu giá trị được thiết lập thì phải so sánh bằng giá trị
-      if (value !== undefined && this.compare.equal(currentNode.value, value)) {
+      if (this.compare.equal(currentNode.value, param)) {
         return currentNode;
       }
 
