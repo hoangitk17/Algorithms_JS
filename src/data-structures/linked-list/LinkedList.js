@@ -207,7 +207,7 @@ export default class LinkedList {
     let currentNode = this.head;
     while (currentNode) {
       // Nếu callback được thiết lập thì phải tìm nút bằng callback.
-      if (typeof(param) === "function" && param(currentNode.value)) {
+      if (typeof param === "function" && param(currentNode.value)) {
         return currentNode;
       }
 
@@ -220,5 +220,26 @@ export default class LinkedList {
     }
 
     return null;
+  }
+
+  sort(type = "asc") {
+    if (typeof type !== "string") return this;
+    type = type.toLowerCase();
+    if (type !== "asc" && type !== "desc") return this;
+    for (let a = this.head; a !== null; a = a.next) {
+      for (let b = a.next; b !== null; b = b.next) {
+        if (type === "asc") {
+          if (a.value > b.value) {
+            [a.value, b.value] = [b.value, a.value];
+          }
+        }
+        if (type === "desc") {
+          if (a.value < b.value) {
+            [a.value, b.value] = [b.value, a.value];
+          }
+        }
+      }
+    }
+    return this;
   }
 }
