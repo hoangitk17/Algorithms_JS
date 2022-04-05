@@ -97,4 +97,14 @@ describe("LinkedList Test", () => {
     let foundNode = list.find(value => value % 2 === 0);
     expect(foundNode.value).toBe(2);
   })
+
+  it("Sort linked list", () => {
+    let list = new LinkedList();
+    list.append(1).append(2).append(5).append(4).append(3);
+    expect(list.sort("").toString()).toBe("1,2,5,4,3");
+    expect(list.sort(null).toString()).toBe("1,2,5,4,3");
+    expect(list.sort().toString()).toBe("1,2,3,4,5");
+    expect(list.sort("asc").toString()).toBe("1,2,3,4,5");
+    expect(list.sort("desc").toString()).toBe("5,4,3,2,1");
+  })
 })
