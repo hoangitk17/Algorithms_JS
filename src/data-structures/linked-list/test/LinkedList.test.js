@@ -83,6 +83,15 @@ describe("LinkedList Test", () => {
     expect(deletedNode2.length).toBe(2);
   })
 
+  it("Delete head and tail", () => {
+    let list = new LinkedList().fromArray([1, 2, 3, 4, 5]);
+    list.deleteHead();
+    expect(list.toString()).toBe("2,3,4,5");
+    list.deleteTail();
+    expect(list.toString()).toBe("2,3,4");
+    
+  })
+
   it("Find element in a list", () => {
     let list = new LinkedList();
     list.append(1);
