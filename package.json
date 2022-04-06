@@ -2,7 +2,7 @@
   "name": "algorithms",
   "version": "0.1.0",
   "scripts": {
-    "test": "jest || true",
+    "test": "jest --watch || true",
     "build": "babel src -d build",
     "coverage": "npm run test -- --coverage --silent"
   },
