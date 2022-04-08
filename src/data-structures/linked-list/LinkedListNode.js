@@ -1,5 +1,6 @@
 export default class LinkedListNode {
   #value = undefined;
+
   #next = null;
 
   constructor(value, next = null) {
@@ -26,5 +27,4 @@ export default class LinkedListNode {
   toString(callback) {
     return callback ? callback(this.#value) : `${this.#value}`;
   }
-
 }

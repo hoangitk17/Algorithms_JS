@@ -1,6 +1,8 @@
 export default class DoublyLinkedListNode {
   #value = undefined;
+
   #next = null;
+
   #previous = null;
 
   constructor(value = undefined, next = null, previous = null) {

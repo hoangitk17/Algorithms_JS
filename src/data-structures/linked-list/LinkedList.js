@@ -1,5 +1,6 @@
 import LinkedListNode from "./LinkedListNode";
 import Comparator from "../../utils/Comparator";
+
 export default class LinkedList {
   constructor(comparatorFunction) {
     /** @var LinkedListNode */
@@ -99,7 +100,7 @@ export default class LinkedList {
       return null;
     }
 
-    let deletedNode = [];
+    const deletedNode = [];
 
     // Nếu nút bị xoá là head thì biến nút kế tiếp head trở thành một head mới.
     while (this.head && this.compare.equal(this.head.value, value)) {
@@ -110,7 +111,8 @@ export default class LinkedList {
     let currentNode = this.head;
 
     if (currentNode !== null) {
-      // Nếu nút tiếp theo là nút bị xoá thì làm hãy nút tiếp theo trở thành nút tiếp theo nữa (next next node).
+      // Nếu nút tiếp theo là nút bị xoá 
+      // thì làm hãy nút tiếp theo trở thành nút tiếp theo nữa (next next node).
       while (currentNode.next) {
         if (this.compare.equal(currentNode.next.value, value)) {
           deletedNode.push(currentNode.next);

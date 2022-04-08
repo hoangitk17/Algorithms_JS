@@ -29,17 +29,17 @@ describe("Comparator", () => {
   it("should equal with two strings", () => {
     const comparator = new Comparator();
     expect(comparator.equal("1", "1")).toBe(true);
-  })
+  });
 
   it("should equal with string and number", () => {
     const comparator = new Comparator();
     expect(comparator.equal("1", 1)).toBe(false);
-  })
+  });
 
   it("should qual with 2 number float", () => {
     const comparator = new Comparator();
     expect(comparator.equal(1, 1.000)).toBe(true);
-  })
+  });
 
   it("should a less than b", () => {
     const comparator = new Comparator();
