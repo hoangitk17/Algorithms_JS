@@ -76,4 +76,19 @@ export default class DoublyLinkedList {
 
     return this;
   }
+
+  /**
+   * @return {DoublyLinkedListNode[]}
+   */
+  toArray() {
+    const nodes = [];
+
+    let currentNode = this.head;
+    while (currentNode) {
+      nodes.push(currentNode);
+      currentNode = currentNode.next;
+    }
+
+    return nodes;
+  }
 }
