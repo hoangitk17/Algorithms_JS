@@ -66,4 +66,14 @@ export default class DoublyLinkedList {
       .map((node) => node.toString(callback))
       .toString();
   }
+
+  /**
+   * @param {*[]} values - Mảng giá trị cần chuyển thành danh sách liên kết.
+   * @return {DoublyLinkedList}
+   */
+  fromArray(values) {
+    values.forEach((value) => this.append(value));
+
+    return this;
+  }
 }
