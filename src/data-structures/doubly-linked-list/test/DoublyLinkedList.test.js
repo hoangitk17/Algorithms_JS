@@ -6,5 +6,9 @@ describe("DoublelyLinkedList", () => {
     list.append(5);
     list.append(6);
     list.append(7).append(8);
+    expect(list.toString()).toBe("5,6,7,8");
+    list.append(9);
+    expect(list.toString()).toBe("5,6,7,8,9");
+    expect(list.append(5).toString()).toBe("5,6,7,8,9,5");
   });
 });
