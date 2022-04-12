@@ -11,4 +11,10 @@ describe("DoublelyLinkedList", () => {
     expect(list.toString()).toBe("5,6,7,8,9");
     expect(list.append(5).toString()).toBe("5,6,7,8,9,5");
   });
+
+  it("Import a double linked list from an array", () => {
+    const list = new DoublyLinkedList();
+    list.fromArray([1, 2, 3]);
+    expect(list.toString()).toBe("1,2,3");
+  });
 });
