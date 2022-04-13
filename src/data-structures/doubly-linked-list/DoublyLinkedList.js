@@ -79,6 +79,30 @@ export default class DoublyLinkedList {
   }
 
   /**
+   * @return {DoublyLinkedListNode}
+   */
+  deleteTail() {
+    if (this.tail === null) {
+      // Không có tail để xoá.
+      return null;
+    }
+    const deletedTail = this.tail;
+    if (this.head === this.tail) {
+      // Danh sách chỉ có một phần tử.
+
+      this.head = null;
+      this.tail = null;
+
+      return deletedTail;
+    }
+    // Danh sách có nhiều phần tử...
+    this.tail = this.tail.previous;
+    this.tail.next = null;
+
+    return deletedTail;
+  }
+
+  /**
    * @param {function} [callback]
    * @return {string}
    */
