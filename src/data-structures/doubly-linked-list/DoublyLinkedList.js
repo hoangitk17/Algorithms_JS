@@ -103,6 +103,33 @@ export default class DoublyLinkedList {
   }
 
   /**
+   * Đảo ngược danh sách liên kết.
+   * @returns {DoublyLinkedList}
+   */
+  reverse() {
+    let currNode = this.head;
+    let prevNode = null;
+    let nextNode = null;
+
+    while (currNode) {
+      // Nơi lưu trữ nút kế tiếp.
+      nextNode = currNode.next;
+      prevNode = currNode.previous;
+      // Thay đổi tham chiếu kế tiếp của nút hiện tại để nó liên kết với nút trước đó.
+      currNode.next = prevNode;
+      currNode.previous = nextNode;
+      // Dịch chuyển nút prevNode và currNode về trước một bước.
+      prevNode = currNode;
+      currNode = nextNode;
+    }
+    // Cập nhật lại head và tail.
+    this.tail = this.head;
+    this.head = prevNode;
+
+    return this;
+  }
+
+  /**
    * @param {function} [callback]
    * @return {string}
    */
