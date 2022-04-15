@@ -103,6 +103,52 @@ export default class DoublyLinkedList {
   }
 
   /**
+   * @param {*} value
+   * @return {DoublyLinkedListNode[]}
+   */
+  delete(value) {
+    if (!this.head) {
+      return null;
+    }
+
+    let deletedNode = [];
+    let currentNode = this.head;
+    while (currentNode) {
+      if (this.compare.equal(currentNode.value, value)) {
+        deletedNode.push(currentNode);
+        if (deletedNode === this.head) {
+          // Nếu nút cần xoá là Head
+          // Đặt nút kế nó là head mới.
+          this.head = deletedNode.next;
+          // Đặt tham chiếu của head mới là null.
+          if (this.head) {
+            this.head.previous = null;
+          }
+          // Nếu các nút trong danh sách có cùng giá trị với giá trị cần xoá
+          // Xoá tất cả các nút và cập nhật lại tail.
+          if (deletedNode === this.tail) {
+            this.tail = null;
+          }
+        } else if (deletedNode === this.tail) {
+          // Nếu nút cần xoá là Tail
+          // Đặt nút trước nó sẽ là tail mới.
+          this.tail = deletedNode.previous;
+          this.tail.next = null;
+        } else {
+          // Nếu nút cần xoá là các nút bình thường
+          const previousNode = deletedNode.previous;
+          const nextNode = deletedNode.next;
+          previousNode.next = nextNode;
+          nextNode.previous = previousNode;
+        }
+      }
+      currentNode = currentNode.next;
+    }
+
+    return deletedNode;
+  }
+
+  /**
    * Đảo ngược danh sách liên kết.
    * @returns {DoublyLinkedList}
    */
