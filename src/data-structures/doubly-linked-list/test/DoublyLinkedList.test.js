@@ -30,4 +30,19 @@ describe("DoublelyLinkedList", () => {
     expect(list.deleteHead().value).toBe(7);
     expect(list.deleteHead()).toBeNull();
   });
+
+  it("Delete tail", () => {
+    const list = new DoublyLinkedList();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    list.append(4);
+    list.append(5);
+    expect(list.toString()).toBe("1,2,3,4,5");
+    list.deleteTail();
+    expect(list.toString()).toBe("1,2,3,4");
+    expect(list.deleteTail().value).toBe(4);
+    expect(list.deleteTail().value).toBe(3);
+    expect(list.toString()).toBe("1,2");
+  });
 });
