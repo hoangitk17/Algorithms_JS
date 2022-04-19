@@ -56,4 +56,21 @@ describe("DoublelyLinkedList", () => {
     expect(list.deleteTail().value).toBe(3);
     expect(list.toString()).toBe("1,2");
   });
+
+  it("Reverse list", () => {
+    const list = new DoublyLinkedList();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    list.append(4);
+    list.append(5);
+    expect(list.toString()).toBe("1,2,3,4,5");
+    expect(list.reverse().toString()).toBe("5,4,3,2,1");
+    const list2 = new DoublyLinkedList();
+    list2.append("a");
+    list2.append("b");
+    list2.append("c");
+    expect(list2.toString()).toBe("a,b,c");
+    expect(list2.reverse().toString()).toBe("c,b,a");
+  });
 });
