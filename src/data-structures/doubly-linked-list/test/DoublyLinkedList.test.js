@@ -73,4 +73,12 @@ describe("DoublelyLinkedList", () => {
     expect(list2.toString()).toBe("a,b,c");
     expect(list2.reverse().toString()).toBe("c,b,a");
   });
+
+  it("To array", () => {
+    const list = new DoublyLinkedList();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    expect(list.toArray().length).toBe(3);
+  });
 });
