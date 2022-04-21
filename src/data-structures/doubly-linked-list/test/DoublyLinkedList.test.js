@@ -81,4 +81,22 @@ describe("DoublelyLinkedList", () => {
     list.append(3);
     expect(list.toArray().length).toBe(3);
   });
+
+  it("Delete by value", () => {
+    const list = new DoublyLinkedList();
+    list.append(1);
+    list.append(2);
+    list.append(3);
+    list.append(1);
+    list.delete(1);
+    expect(list.toString()).toBe("2,3");
+    list.delete(3);
+    expect(list.toString()).toBe("2");
+    list.delete(2);
+    expect(list.toString()).toBe("");
+    list.append(1);
+    list.append(1);
+    list.append(1);
+    expect(list.delete(1).length).toBe(3);
+  });
 });
