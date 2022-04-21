@@ -111,11 +111,13 @@ export default class DoublyLinkedList {
       return null;
     }
 
-    let deletedNode = [];
+    let deletedNode = null;
+    let deletedNodes = [];
     let currentNode = this.head;
     while (currentNode) {
       if (this.compare.equal(currentNode.value, value)) {
-        deletedNode.push(currentNode);
+        deletedNode = currentNode;
+        deletedNodes.push(currentNode);
         if (deletedNode === this.head) {
           // Nếu nút cần xoá là Head
           // Đặt nút kế nó là head mới.
@@ -145,7 +147,7 @@ export default class DoublyLinkedList {
       currentNode = currentNode.next;
     }
 
-    return deletedNode;
+    return deletedNodes;
   }
 
   /**
