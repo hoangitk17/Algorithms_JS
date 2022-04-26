@@ -3,15 +3,15 @@ export default class Queue2 {
     this.elements = [...args];
   }
 
-  get length() {
-    this.elements.length;
+  get size() {
+    return this.elements.length;
   }
 
   /**
    * @return {boolean}
    */
   get isEmpty() {
-    return this.length === 0;
+    return this.size === 0;
   }
 
   /**
@@ -19,6 +19,7 @@ export default class Queue2 {
    * @return {*}
    */
   peek() {
+    if (this.isEmpty) return null;
     return this.elements[0];
   }
 
@@ -37,6 +38,7 @@ export default class Queue2 {
    * @return {*}
    */
   dequeue() {
+    if (this.isEmpty) return null;
     return this.elements.shift();
   }
 
@@ -46,10 +48,6 @@ export default class Queue2 {
    */
   toString(callback) {
     return callback ? callback(this.elements) : this.elements.toString();
-  }
-
-  static fromArray(arr) {
-    return new Queue2(...arr);
   }
 
   toArray() {
