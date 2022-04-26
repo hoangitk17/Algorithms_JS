@@ -1,9 +1,9 @@
 export default class Queue3 {
-  constructor(capacity) {
+  constructor(capacity = 500) {
     this.capacity = capacity;
     this.elements = [];
-    this.rear = -1;
-    this.front = -1;
+    this.rear = 0;
+    this.front = 0;
   }
 
   get size() {
@@ -39,8 +39,8 @@ export default class Queue3 {
       // Queue is full
       console.log("OverFlow");
     else {
-      this.elements[rear] = value; // Add the element to the back
-      rear++;
+      this.elements[this.rear] = value; // Add the element to the back
+      this.rear++;
     }
   }
 
@@ -54,9 +54,20 @@ export default class Queue3 {
       // Queue is empty
       return undefined;
     else {
-      this.elements[front] = undefined; // Delete the front element
-      front++;
+      let deletedValue = this.elements[this.front];
+      this.elements[this.front] = undefined; // Delete the front element
+      this.front++;
+      return deletedValue;
     }
+  }
+
+  toString(callback) {
+    if (callback) return callback(this.elements);
+    let result = [];
+    for (let i = this.front; i < this.rear; i++) {
+      result.push(this.elements[i]);
+    }
+    return result.join(",");
   }
 
   /**
