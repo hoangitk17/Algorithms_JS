@@ -1,24 +1,25 @@
+/**
+ * Hàng đợi vòng
+ * https://www.geeksforgeeks.org/circular-queue-set-1-introduction-array-implementation/
+ */
 export default class Queue3 {
   constructor(capacity = 500) {
     this.capacity = capacity;
     this.elements = [];
-    this.rear = 0;
+    this.rear = -1;
     this.front = 0;
-  }
-
-  get size() {
-    return this.rear - this.front;
+    this.size = 0;
   }
 
   get isFull() {
-    this.size === this.capacity;
+    return this.size === this.capacity;
   }
 
   /**
    * @return {boolean}
    */
   get isEmpty() {
-    return this.rear === this.front;
+    return this.size === 0;
   }
 
   /**
@@ -26,46 +27,55 @@ export default class Queue3 {
    * @return {*}
    */
   peek() {
+    if (this.isEmpty) return console.log("Queue empty");
     return this.elements[this.front];
   }
 
   /**
-   * Thêm một phần tử mới vào hàng đợi (tail của danh sách liên kết)
-   * Phần tử đó sẽ được xử lý sau tất cả các phần tử ở trước nó.
    * @param {*} value
    */
   enqueue(value) {
-    if (this.rear == this.capacity)
+    if (this.isFull)
       // Queue is full
-      console.log("OverFlow");
+      return console.log("OverFlow");
     else {
+      this.rear = (this.rear + 1) % this.capacity;
       this.elements[this.rear] = value; // Add the element to the back
-      this.rear++;
+      this.size++;
     }
   }
 
   /**
-   * Xoá phần tử ở vị trí đầu tiên khỏi hàng đợi (head ở danh sách liên kết).
-   * Nếu hàng đợi trống trả về null.
    * @return {*}
    */
   dequeue() {
-    if (this.isEmpty)
+    if (this.isEmpty) {
       // Queue is empty
+      console.log("Queue is empty");
       return undefined;
-    else {
+    } else {
       let deletedValue = this.elements[this.front];
-      this.elements[this.front] = undefined; // Delete the front element
-      this.front++;
+      this.front = (this.front + 1) % this.capacity; // Delete the front element
+      this.size--;
       return deletedValue;
     }
   }
 
   toString(callback) {
+    if (this.isEmpty) return "";
     if (callback) return callback(this.elements);
     let result = [];
-    for (let i = this.front; i < this.rear; i++) {
-      result.push(this.elements[i]);
+    if (this.front <= this.rear) {
+      for (let i = this.front; i <= this.rear; i++) {
+        result.push(this.elements[i]);
+      }
+    } else {
+      for (let i = this.front; i < this.capacity; i++) {
+        result.push(this.elements[i]);
+      }
+      for (let j = 0; j <= this.rear; j++) {
+        result.push(this.elements[j]);
+      }
     }
     return result.join(",");
   }
@@ -76,6 +86,7 @@ export default class Queue3 {
   clear() {
     this.elements = [];
     this.rear = -1;
-    this.front = -1;
+    this.front = 0;
+    this.size = 0;
   }
 }
