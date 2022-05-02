@@ -15,14 +15,14 @@ export default class Stack2 {
    * @returns {boolean}
    */
   #isInt(value) {
-    return !isNaN(value) && parseInt(value) == value;
+    return !isNaN(value) && parseInt(value) === value;
   }
 
   /**
    * @param {number} capacity
    */
   setCapacity(capacity) {
-    if (this.#isInt(capacity)) throw Error("Capacity is not a number");
+    if (!this.#isInt(capacity)) throw Error("Capacity is not a number");
     if (capacity < 0 && capacity !== Stack2.UNLIMITED_CAPACITY)
       throw Error("Capacity is not negative number");
     this.#capacity = capacity;
@@ -70,5 +70,16 @@ export default class Stack2 {
    */
   pop() {
     return this.#elements.pop();
+  }
+
+  /**
+   * @returns {*} elements
+   */
+  toArray() {
+    return this.#elements;
+  }
+
+  clear() {
+    this.#elements = [];
   }
 }
