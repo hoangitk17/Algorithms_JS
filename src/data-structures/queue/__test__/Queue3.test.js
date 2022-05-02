@@ -60,4 +60,23 @@ describe("Queue", () => {
     queue.clear();
     expect(queue.size).toBe(0);
   });
+  it("Add over capacity", () => {
+    const queue = new Queue3(4);
+
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    queue.enqueue(4);
+    expect(queue.isFull).toBe(true);
+    queue.enqueue(5);
+
+    expect(queue.capacity).toBe(4);
+    expect(queue.size).toBe(4);
+    expect(queue.toString()).toBe("1,2,3,4");
+    expect(queue.dequeue()).toBe(1);
+    queue.enqueue(5);
+    expect(queue.toString()).toBe("2,3,4,5");
+    queue.enqueue(6);
+    expect(queue.toString()).toBe("2,3,4,5");
+  });
 });
