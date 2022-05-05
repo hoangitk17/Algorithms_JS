@@ -1,59 +1,100 @@
 export default class HashTableNormal {
-  #table = null;
+  #buckets = null;
   #size = 0;
-  constructor() {
-    this.#table = new Array(127);
+
+  /**
+   * @param {number} n
+   */
+  constructor(n = this.DEFAULT_BUCKET_SIZE) {
+    this.#buckets = new Array(n);
     this.#size = 0;
+  }
+
+  get DEFAULT_BUCKET_SIZE() {
+    return 32;
   }
 
   get size() {
     return this.#size;
   }
 
-  _hash(key) {
+  get buckets() {
+    return this.#buckets;
+  }
+
+  hash(key) {
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
       hash += key.charCodeAt(i);
     }
-    return hash % this.#table.length;
+    return hash % this.#buckets.length;
   }
 
+  /**
+   * @param {*} key
+   * @param {*} value
+   * @returns
+   */
   set(key, value) {
-    const index = this._hash(key);
-    if (this.#table[index]) {
-      for (let i = 0; i < this.#table[index].length; i++) {
-        if (this.#table[index][i][0] === key) {
-          this.#table[index][i][1] = value;
+    const index = this.hash(key);
+    if (this.#buckets[index]) {
+      for (let i = 0; i < this.#buckets[index].length; i++) {
+        if (this.#buckets[index][i][0] === key) {
+          this.#buckets[index][i][1] = value;
           return;
         }
       }
-      this.#table[index].push([key, value]);
+      this.#buckets[index].push([key, value]);
     } else {
-      this.#table[index] = [];
-      this.#table[index].push([key, value]);
+      this.#buckets[index] = [];
+      this.#buckets[index].push([key, value]);
     }
     this.#size++;
   }
 
+  /**
+   * @param {*} key
+   * @returns
+   */
   get(key) {
-    const index = this._hash(key);
-    if (this.#table[index]) {
-      for (let i = 0; i < this.#table.length; i++) {
-        if (this.#table[index][i][0] === key) {
-          return this.#table[index][i][1];
+    const index = this.hash(key);
+    if (this.#buckets[index]) {
+      for (let i = 0; i < this.#buckets.length; i++) {
+        if (this.#buckets[index][i][0] === key) {
+          return this.#buckets[index][i][1];
         }
       }
     }
     return undefined;
   }
 
-  remove(key) {
-    const index = this._hash(key);
+  /**
+   * @param {*} key
+   * @returns {boolean}
+   */
+  has(key) {
+    const index = this.hash(key);
+    if (this.#buckets[index]) {
+      for (let i = 0; i < this.#buckets.length; i++) {
+        if (this.#buckets[index][i][0] === key) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
-    if (this.#table[index] && this.#table[index].length) {
-      for (let i = 0; i < this.#table.length; i++) {
-        if (this.#table[index][i][0] === key) {
-          this.#table[index].splice(i, 1);
+  /**
+   * @param {*} key
+   * @returns
+   */
+  remove(key) {
+    const index = this.hash(key);
+
+    if (this.#buckets[index] && this.#buckets[index].length) {
+      for (let i = 0; i < this.#buckets.length; i++) {
+        if (this.#buckets[index][i][0] === key) {
+          this.#buckets[index].splice(i, 1);
           this.#size--;
           return true;
         }
@@ -64,7 +105,7 @@ export default class HashTableNormal {
   }
 
   display() {
-    this.#table.forEach((values, index) => {
+    this.#buckets.forEach((values, index) => {
       const chainedValues = values.map(
         ([key, value]) => `[ ${key}: ${value} ]`
       );
