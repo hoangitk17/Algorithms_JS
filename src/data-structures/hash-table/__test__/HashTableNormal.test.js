@@ -24,4 +24,11 @@ describe("HashTableNormal Test", () => {
     expect(hashTable.has("a")).toBe(true);
     expect(hashTable.get("a")).toBe("hoàng");
   });
+
+  it("Should generate proper hash for specified key", () => {
+    let hashTable = new HashTable();
+    expect(hashTable.hash("a")).toBe(1);
+    expect(hashTable.hash("b")).toBe(2);
+    expect(hashTable.hash("c")).toBe(3);
+  });
 });
